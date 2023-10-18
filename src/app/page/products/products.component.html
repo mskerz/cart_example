@@ -1,0 +1,25 @@
+<div class="container" style="margin: 100px;">
+    <div class="row">
+      <ng-container *ngFor="let product of products; let i = index">
+        <div class="col-4">
+          <mat-card class="m-3 border-3 p-3">
+            <div class="d-flex flex-row">
+              <img [src]="product.image" alt="{{ product.title }}" width="10%" />
+              <span class="ms-auto">
+                <button mat-raised-button color="primary" (click)="addToCart(product)">
+                  <mat-icon>add</mat-icon> <mat-icon>shopping_cart</mat-icon>
+                </button>
+              </span>
+            </div>
+            <h2>{{ product.title }}</h2>
+            <p>Price: ${{ product.price }}</p>
+            <p class="description">Description: {{ product.description.substring(0, 300) }}</p>
+            <p>Category: {{ product.category }}</p>
+            <p>Rating: {{ product.rating.rate }} ({{ product.rating.count }} ratings)</p>
+          </mat-card>
+        </div>
+        <div *ngIf="i % 3 === 2" class="w-100"></div>
+      </ng-container>
+    </div>
+  </div>
+  

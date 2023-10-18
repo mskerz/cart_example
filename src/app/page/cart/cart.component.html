@@ -1,0 +1,49 @@
+<div class="container p-3 m-5 ">
+     
+    <div class="justify-content-center align-items-center">
+        <h1 >Shopping Cart&nbsp; <mat-icon>shopping_cart</mat-icon></h1>
+        <table class="table" *ngIf="cart_products.length > 0">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of cart_products ">
+              <td>
+                <img [src]="product.image" alt="{{ product.title }}" width="50">
+              </td>
+              <td>{{ product.title }}</td>
+              <td>{{ product.price | currency }}</td>
+              <td  >
+                <button mat-raised-button class="me-2"  color="primary" (click)="increment_product(product)"><mat-icon>add</mat-icon></button>
+                <input type="text" pInputText  class="col-1"  [(ngModel)]="product.quantity_order">
+                <button mat-raised-button class="ms-2"  (click)="decremend_product(product)"      style="background-color: rgb(227, 54, 54);color: white;" ><mat-icon>remove</mat-icon></button>
+              </td>
+              <td>{{ product.price * product.quantity_order | currency }}</td>
+              <td>
+                <button (click)="removeFromCart(product)" mat-icon-button><mat-icon>delete</mat-icon></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="cart_products.length === 0">
+          Your cart is empty.
+        </div>
+        
+        <div  class="float-end" >
+            <div class="ms-auto">Total: {{ total | currency }}</div>
+            <div class="d-flex flex-row">
+                <button mat-raised-button color="primary" class="m-2" routerLink="/products">Go back to Products</button>
+                <button *ngIf="cart_products.length!=0" class="m-2" mat-raised-button color="accent" (click)="ConfirmCancelOrder()">Cancel</button>    
+            </div>
+        </div>
+    </div>
+
+  </div>
+  
